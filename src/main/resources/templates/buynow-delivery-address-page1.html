@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Address Details</title>
+	
+	<!--toastr CDN-->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+	
+</head>
+
+<style>
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	body {
+		font-family: "Poppins", sans-serif;
+		height: 100vh;
+		width: 90%;
+		margin: 0px auto;
+		padding: 50px 0px 0px;
+		color: #4E5150;
+	}
+
+	body header {
+		height: 2%;
+		margin-bottom: 30px;
+	}
+
+	body header>h3 {
+		font-size: 25px;
+		color: #F2994A;
+		font-weight: 400;
+		margin-top: 25px;
+	}
+
+	body main {
+		height: 85%;
+		display: flex;
+		column-gap: 100px;
+	}
+
+	body main .checkout-form {
+		width: 50%;
+	}
+
+	body main .checkout-form form h6 {
+		font-size: 25px;
+		font-weight: 500;
+	}
+
+	body main .checkout-form form .form-control {
+		margin: 10px 0px;
+		position: relative;
+	}
+
+	body main .checkout-form form .form-control label:not([for=checkout-checkbox]) {
+		display: block;
+		font-size: 17px;
+		font-weight: 500;
+		margin-bottom: 2px;
+	}
+
+	body main .checkout-form form .form-control input:not([type=checkbox]) {
+		width: 100%;
+		padding: 10px 10px 10px 40px;
+		border-radius: 10px;
+		outline: none;
+		border: 0.2px solid #4e515085;
+		font-size: 16px;
+		font-weight: 700;
+	}
+	
+	body main .checkout-form form .form-control select:not([type=checkbox]) {
+		width: 100%;
+		padding: 10px 10px 10px 40px;
+		border-radius: 10px;
+		outline: none;
+		border: 0.2px solid #4e515085;
+		font-size: 16px;
+		font-weight: 700;
+	}
+
+	body main .checkout-form form .form-control input:not([type=checkbox])::placeholder {
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	body main .checkout-form form .form-control label[for=checkout-checkbox] {
+		font-size: 15px;
+		font-weight: 500;
+		line-height: 10px;
+	}
+
+	body main .checkout-form form .form-control>div {
+		position: relative;
+	}
+
+	body main .checkout-form form .form-control>div span.fa {
+		position: absolute;
+		top: 50%;
+		left: 0%;
+		transform: translate(15px, -50%);
+	}
+
+	body main .checkout-form form .form-group {
+		display: flex;
+		column-gap: 25px;
+	}
+
+	body main .checkout-form form .checkbox-control {
+		display: flex;
+		align-items: center;
+		column-gap: 10px;
+	}
+
+	body main .checkout-form form .form-control-btn {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+
+	body main .checkout-form form .form-control-btn button {
+		padding: 10px 25px;
+		margin-top: 10px;
+		font-size: 17px;
+		color: #fff;
+		background: #F2994A;
+		border: 0;
+		border-radius: 7px;
+		letter-spacing: 0.5px;
+		font-weight: 200;
+		cursor: pointer;
+	}
+
+	body main .checkout-details {
+		width: 40%;
+	}
+
+	body main .checkout-details .checkout-details-inner {
+		background: #F2F2F2;
+		border-radius: 10px;
+		padding: 20px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists {
+		display: flex;
+		flex-direction: column;
+		row-gap: 10px;
+		margin-bottom: 20px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card {
+		width: 90%;
+		display: flex;
+		column-gap: 15px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-image {
+		width: 30%;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-image img {
+		width: 100%;
+		object-fit: fill;
+		border-radius: 10px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details {
+		display: flex;
+		flex-direction: column;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details .card-name {
+		font-size: 20px;
+		font-weight: 500;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details .card-price {
+		font-size: 15px;
+		font-weight: 500;
+		color: #F2994A;
+		margin-top: 10px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details .card-price span {
+		color: #4E5150;
+		text-decoration: line-through;
+		margin-left: 10px;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details .card-wheel {
+		margin-top: 17px;
+		border: 0.2px solid #4e515085;
+		width: 90px;
+		padding: 8px 8px;
+		border-radius: 10px;
+		font-size: 12px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-lists .card .card-details .card-wheel button {
+		background: #E0E0E0;
+		color: #828282;
+		width: 15px;
+		height: 15px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border: 0;
+		cursor: pointer;
+		border-radius: 3px;
+		font-weight: 500;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-shipping,
+	body main .checkout-details .checkout-details-inner .checkout-total {
+		display: flex;
+		font-size: 20px;
+		padding: 5px 0px;
+		border-top: 1px solid #BDBDBD;
+		justify-content: space-between;
+	}
+
+	body main .checkout-details .checkout-details-inner .checkout-shipping p,
+	body main .checkout-details .checkout-details-inner .checkout-total p {
+		font-size: 15px;
+		font-weight: 500;
+	}
+
+	body footer {
+		height: 5%;
+		color: #BDBDBD;
+		display: -ms-grid;
+		display: grid;
+		place-items: center;
+		font-size: 12px;
+	}
+
+	body footer a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	@media screen and (max-width: 1024px) {
+		body {
+			width: 80%;
+		}
+
+		body main {
+			column-gap: 70px;
+		}
+	}
+
+	@media screen and (max-width: 768px) {
+		body {
+			width: 92%;
+		}
+
+		body main {
+			flex-direction: column-reverse;
+			height: auto;
+			margin-bottom: 50px;
+		}
+
+		body main .checkout-form {
+			width: 100%;
+			margin-top: 35px;
+		}
+
+		body main .checkout-details {
+			width: 100%;
+		}
+
+		body footer {
+			height: 10%;
+		}
+	}
+
+
+	::selection {
+		color: #FFFFFF;
+		background-color: #31285C;
+	}
+
+
+	.wrapper {
+		width: 600px;
+		height: auto;
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 0 30px;
+		padding-top: 50px;
+		padding-bottom: 20px;
+		font-weight: 500;
+		font-size: 15px;
+
+	}
+
+	.footer {
+		margin-top: 20px;
+		font-weight: 500;
+		font-size: 1rem;
+	}
+
+	.footer a {
+		color: #31285C;
+	}
+
+	button {
+		width: 100%;
+		height: 45px;
+		border-radius: 10px;
+		color: #fff;
+		font-weight: 600;
+		outline: none;
+		font-size: .9rem;
+		background-color: #31285C;
+		border: none;
+	}
+
+	.group {
+		margin: 10px 0;
+	}
+
+	table {
+		width: 100%;
+	}
+
+	.item-img img {
+		width: 5rem;
+		height: 5rem;
+		border-radius: 10px;
+	}
+
+	.item-details {
+		padding: 15px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	body {
+		padding-left: 20px;
+	}
+
+	.item-details .item-title {
+		color: #000;
+		font-weight: 600;
+		text-transform: uppercase;
+
+	}
+
+	.item-details .item-size,
+	.item-qty {
+		color: #AAA8BB;
+		font-weight: 500;
+		font-size: 14px;
+		padding: 3px;
+	}
+
+	.item-price {
+		font-weight: 600;
+		text-align: right;
+	}
+
+	.divider {
+		width: 100%;
+		height: .5px;
+		background-color: lightgray;
+		margin: 10px 0;
+	}
+	.my-option{
+		width: 400px;
+	}
+</style>
+
+<body>
+
+
+	<!--==============================================================DELIVERY ADDRESS===============================================================-->
+
+
+	<!--<div th:each="(listOfAdd, iStat : ${listOfAddress})" style="margin-top: 25px;">
+		<div class="container">
+			<div class="address" style="display: flex; gap: 1rem;">
+				<input type="radio" th:value="${AddIdFound}" id="addressId" name="addressId" class="form__radio-input" />
+				<h3 th:text="${listOfAdd.firstName + ' '+ listOfAdd.lastName}">Customer Name</h3>
+				<p th:text="${listOfAdd.mobile}">Customer Mobile Number</p>
+			</div>
+			<div class="address" style="display: flex; gap: 0.5rem; padding-top: 5px;">
+				<p th:text="|H. No. ${listOfAdd.streetAddress},|">Sreet Address</p>
+				<p th:text="|${listOfAdd.city},|">City</p>
+				<p th:text="|${listOfAdd.state},|">State</p>
+				<p th:text="${listOfAdd.zipCode}">Pincode</p>
+			</div>
+		</div>
+	</div>-->
+	
+
+	<header>
+		<h3>DELIVERY ADDRESS</h3>
+	</header>
+
+	<main>
+
+		<section class="checkout-form">
+			<form th:action="@{/Order/addBuyNowCustomerOrder}" th:object="${customerOrderDTO}" method="post">
+		
+				<h6>Available Adress :</h6>
+				<div class="form-control">
+					<span class="fa fa-envelope"></span>
+					<select th:field="*{addressId}" id="category" name="category" required >
+						<option value="" style="width: 400px;">Choose Delivery Address...</option>
+						<option th:each="listOfAdd : ${listOfAddress}" th:value="${listOfAdd.id}">
+							<div class="container">
+								<p th:text="|${listOfAdd.firstName + ' '+ listOfAdd.lastName},|">Customer Name</p>
+								<p th:text="|Mob. No. +91 ${listOfAdd.mobile},|">Customer Mobile Number</p>
+								<p th:text="|H. No.- ${listOfAdd.streetAddress},|">Sreet Address</p>
+								<p th:text="|City- ${listOfAdd.city},|">City</p>
+								<p th:text="|State- ${listOfAdd.state},|">State</p>
+								<p th:text="|Pincode- ${listOfAdd.pincode}|">Pincode</p>
+							</div>
+						</option>
+					</select>
+				</div>
+		
+				<br>
+				<div class="form-control-btn">
+					<button>Proceed to Payment </button>
+				</div>
+		
+			</form>
+		</section>
+				
+				
+				
+				
+				
+		<section class="checkout-form">
+			<form th:action="@{/address/buyNowPageaddAddress}" th:object="${addressDTO}" method="post">
+				
+				<br>
+				<br>
+				<h6>Add a new address :</h6>
+				<!--<br>
+				<h6>Shipping address :</h6>-->
+				<div class="form-control">
+					<label for="checkout-name">First Name</label>
+					<div>
+						<span class="fa fa-user-circle"></span>
+						<input type="text" th:field="*{firstName}" id="checkout-name" name="checkout-name" placeholder="Enter first name..." required>
+					</div>
+				</div>
+				
+				<div class="form-control">
+					<label for="checkout-email">Last Name</label>
+					<div>
+						<span class="fa fa-envelope"></span>
+						<input type="text" th:field="*{lastName}" id="checkout-email" name="checkout-email" placeholder="Enter last name..." required>
+					</div>
+				</div>
+				
+				<div class="form-control">
+					<label for="checkout-phone">Mobile Number</label>
+					<div>
+						<span class="fa fa-phone"></span>
+						<input type="number" th:field="*{mobile}" name="checkout-phone" id="checkout-phone" placeholder="Enter you mobile number..." required>
+					</div>
+				</div>
+				
+				<div class="form-control">
+					<label for="checkout-address">Address</label>
+					<div>
+						<span class="fa fa-home"></span>
+						<input type="text" th:field="*{streetAddress}" name="checkout-address" id="checkout-address" placeholder="Your address..." required>
+					</div>
+				</div>
+				
+				<div class="form-control">
+					<label for="checkout-city">City</label>
+					<div>
+						<span class="fa fa-building"></span>
+						<input type="text" th:field="*{city}" name="checkout-city" id="checkout-city" placeholder="Your city..." required>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					
+					<div class="form-control">
+						<label for="checkout-address">State</label>
+						<div>
+							<span class="fa fa-home"></span>
+							<input type="text" th:field="*{state}" name="checkout-address" id="checkout-address" placeholder="Your state..." required>
+						</div>
+					</div>
+				
+					<div class="form-control">
+						<label for="checkout-postal">Pincode</label>
+						<div>
+							<span class="fa fa-archive"></span>
+							<input type="number" th:field="*{pincode}" name="checkout-postal" id="checkout-postal" placeholder="Your pincode..." required>
+						</div>
+					</div>
+				
+				</div>
+				
+				<br>
+				<button>SAVE DELIVERY ADDRESS</button>
+				
+				<!--<div class="form-control-btn">
+					<button>Proceed to Payment </button>
+				</div>-->
+				
+			</form>
+		</section>
+
+		<!--================================================================END HERE================================================================-->
+
+
+
+		<!--==============================================================ORDER SUMMARY===============================================================-->
+
+		<div class="wrapper">
+			<h3 style="color: #F2994A; font-size: 150%;">ORDER SUMMARY : <span>[[${count}]]</span></h3>
+			<br>
+			<h3>Total Items: <span>[[${count}]]</span></h3>
+			<div class="group">
+				<table>
+					<tr th:each="(CheckOutDetails, iStat : ${CheckOutDetails})">
+						<td class="item-img"><img th:src="@{${'/productimages/' + CheckOutDetails.imageName}}">
+						</td>
+						<td class="item-details">
+							<span class="item-title" th:text="${CheckOutDetails.name}">Men's Casual Shoes</span>
+							<span class="item-size">Size : Large</span>
+							<span class="item-size">Color : <span th:text="${CheckOutDetails.color}"> Black, Blue
+								</span></span>
+							<span class="item-qty">Qty: 1</span>
+							<span class="item-size">Brand : <span th:text="${CheckOutDetails.brand}"> Brand
+									Name</span></span>
+							<span class="item-size">Info : <span th:text="${CheckOutDetails.description}"> Black, Blue
+								</span></span>
+						</td>
+						<td class="item-price" th:text="${CheckOutDetails.discountedPrice}">₹899.00</td>
+
+					</tr>
+					
+				</table>
+			</div>
+
+			<div class="divider"></div>
+			<table>
+				<tr>
+					<td class="item-qty">Subtotal</td>
+					<td class="item-price" th:text="${totalDicountedPrice}">₹2898.00</td>
+				<tr>
+				<tr>
+					<td class="item-qty">Shipping</td>
+					<td class="item-price" th:if="${Delivery_Charges!=0.0}">[[${Delivery_Charges}]]</td>
+					<td class="item-price" th:if="${Delivery_Charges==0.0}">Free</td>
+				<tr>
+				<tr>
+					<td style="font-size:18px;" class="item-qty">Total</td>
+					<td style="font-size:18px;" class="item-price" th:text="${totalDicountedPriceWithShipping}">3000.00
+					</td>
+				<tr>
+
+			</table>
+
+			<!--<a th:href="@{/home/deliveryAddressPage}"><div class="group">
+			<button>CONTINUE</button>
+		</div></a>-->
+		</div>
+
+
+		<!--=============================================END HERE========================================-->
+
+
+	</main>
+	
+	
+<!--Iss code ko list page par dikhana hai...jaha hum Add, Edit and Delete Action ko perform kar rahe hai-->
+<script th:inline="javascript">
+	window.onload = function() 
+	{
+		var msg = /*[[${message}]]*/       
+		
+		console.log(msg);
+		
+		if(msg == "If item added") 
+		{
+			Command: toastr["success"] ("Address successfully added.")
+		} 
+		else if(msg == "If item removed") 
+		{
+			Command: toastr["error"] ("Item successfully removed from cart.")
+		} 
+		else if(msg == "If item saved for later") 
+		{
+			Command: toastr["warning"] ("Item has been Saved For Later.")
+		}
+		else if(msg == "If item removed from save for later") 
+		{
+			Command: toastr["error"] ("Item has been removed from your saved list.")
+		}
+		else if(msg == "If item moved back to cart") 
+		{
+			Command: toastr["info"] ("Item has been moved to your cart.")
+		}
+		
+		toastr.options = 
+		{
+				'closeButton': true,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+		}
+	}
+</script>
+
+</body>
+
+</html>

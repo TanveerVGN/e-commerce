@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Buynow Check Out Details</title>
+</head>
+
+<style>
+	::selection {
+		color: #FFFFFF;
+		background-color: #31285C;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		font-family: "Poppins", sans-serif;
+		list-style: none;
+		text-decoration: none;
+	}
+
+	body {
+		width: 100%;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #F0F0F0F0;
+		flex-direction: column;
+		margin: 20px 0;
+	}
+
+
+	.wrapper {
+		width: 440px;
+		height: 100%;
+		background-color: #fff;
+		border-radius: 10px;
+		padding: 0 30px;
+		padding-top: 50px;
+		padding-bottom: 20px;
+		font-weight: 500;
+		font-size: 15px;
+		box-shadow: 0 0 15px rgba(0, 0, 0, 0.07);
+	}
+
+	.footer {
+		margin-top: 20px;
+		font-weight: 500;
+		font-size: 1rem;
+	}
+
+	.footer a {
+		color: #31285C;
+	}
+
+	button {
+		width: 100%;
+		height: 45px;
+		border-radius: 10px;
+		color: #fff;
+		font-weight: 600;
+		outline: none;
+		font-size: .9rem;
+		background-color: #F2994A;
+		border: none;
+	}
+
+	.btn {
+		width: 15%;
+		height: 30px;
+		border-radius: 5px;
+		color: #fff;
+		outline: none;
+		font-size: 1rem;
+		background-color: #F2994A;
+		border: none;
+	}
+
+	.group {
+		margin: 10px 0;
+	}
+
+	table {
+		width: 100%;
+	}
+
+	.item-img img {
+		width: 7rem;
+		height: 7rem;
+		border-radius: 5px;
+	}
+
+	.item-details {
+		padding: 5px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	body {
+		padding-left: 5px;
+	}
+
+	.item-details .item-title {
+		color: #000;
+		font-weight: 600;
+		text-transform: uppercase;
+		margin-top: 2%;
+
+	}
+
+	.item-details .item-size,
+	.item-qty {
+		color: #AAA8BB;
+		font-weight: 500;
+		padding: 4px;
+		font-size: 14px;
+	}
+
+	.item-price {
+		font-weight: 600;
+		text-align: right;
+	}
+
+	.divider {
+		width: 100%;
+		height: .5px;
+		background-color: lightgray;
+		margin: 10px 0;
+	}
+</style>
+
+<body>
+
+
+	<div class="wrapper" th:if="${!CheckOutDetails.isEmpty()}">
+
+		<h2 style="color: #F2994A;">ORDER SUMMARY : <span>[[${count}]]</span></h2>
+		<br>
+		<h3>Total Items: <span>[[${count}]]</span></h3>
+		<div class="group" th:each="(CheckOutDetails, iStat : ${CheckOutDetails})">
+			<table>
+				<tr>
+					<td class="item-img"><img th:src="@{${'/productimages/' + CheckOutDetails.imageName}}"></td>
+					<td class="item-details">
+						<span class="item-title" th:text="${CheckOutDetails.name}"> Men's Casual Shoes </span>
+						<span class="item-size">Size : Large</span>
+						<span class="item-size">Color : <span th:text="${CheckOutDetails.color}"> Black, Blue </span></span>
+						<span class="item-qty">Qty: 1</span>
+						<span class="item-size">Brand : <span th:text="${CheckOutDetails.brand}"> Brand Name </span></span>
+						<span class="item-size">Info : <span th:text="${CheckOutDetails.description}"> Black, Blue </span></span>
+					</td>
+					<td class="item-price" th:text="${CheckOutDetails.discountedPrice}"> ₹899.00 </td>
+				</tr>
+
+				<!--<tr>
+					<td class="item-img"><img
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjwFtmbw7YaM7hDruOLb77JOifKlGAn5NqaA&usqp=CAU">
+					</td>
+					<td class="item-details">
+						<span class="item-title">Men's Woolen Jacket</span>
+						<span class="item-size">Size: M</span>
+						<span class="item-qty">Quantity: 1</span>
+					</td>
+					<td class="item-price">₹999.00</td>
+				</tr>
+				<tr>
+					<td class="item-img"><img
+							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO_yBcI2xSyryJ7hTEu0f6m6L5RsQOxBdbKw&usqp=CAU">
+					</td>
+					<td class="item-details">
+						<span class="item-title">Men's Casual Trouser</span>
+						<span class="item-size">Size: M</span>
+						<span class="item-qty">Quantity: 1</span>
+					</td>
+					<td class="item-price">₹1000.00</td>
+				</tr>
+-->
+			</table>
+			<a th:href="@{/getBuyNow/{id} (id = ${CheckOutDetails.id})}"><button class="btn">+</button></a>
+			<a th:href="@{/removeBuynowCheckOutItem/{index} (index = ${iStat.index})}"><button
+					class="btn">--</button></a>
+		</div>
+
+		<div class="divider"></div>
+		<table>
+			<tr>
+				<td class="item-qty">Subtotal</td>
+				<td class="item-price" th:text="${totalDicountedPrice}">₹2898.00</td>
+			<tr>
+			<tr>
+				<td class="item-qty">Shipping</td>
+				<td class="item-price" th:if="${Delivery_Charges!=0.0}">[[${Delivery_Charges}]]</td>
+				<td class="item-price" th:if="${Delivery_Charges==0.0}">Free</td>
+			<tr>
+			<tr>
+				<td style="font-size:17px;" class="item-qty">Total</td>
+				<td style="font-size:17px;" class="item-price" th:text="${totalDicountedPriceWithShipping}">3000.00</td>
+			<tr>
+
+		</table>
+
+		<a th:href="@{/buyNowDeliveryAddressPage}">
+			<div class="group">
+				<button>CONTINUE</button>
+			</div>
+		</a>
+	</div>
+
+	<div th:if="${CheckOutDetails.isEmpty()}">
+		<h2 style="color: orangered;">Nothing to display. Please add some product...!</h2>
+		<br>
+		<br>
+		<a th:href="@{/home}"><button>RETURN TO SHOP</button></a>
+	</div>
+
+</body>
+
+</html>

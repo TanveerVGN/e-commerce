@@ -1,0 +1,356 @@
+<html lang="en" class=" fonts-loaded">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/css/style-6.css">
+	<link rel="stylesheet" type="text/css" href="/css/style-1.css">
+	<link rel="stylesheet" type="text/css" href="/css/style-2.css">
+	<!--<link rel="stylesheet" type="text/css" href="style-3.css">
+    <link rel="stylesheet" type="text/css" href="style-4.css"> -->
+	<link rel="stylesheet" type="text/css" href="/css/style-5.css">
+
+	
+	<!--toastr CDN-->
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+      
+	
+	
+</head>
+
+<body>
+	<div id="container">
+		<div>
+			<div class="_1Er18h">
+				<div class="_6t1WkM _3HqJxg">
+					<div class="_1YokD2 _2GoDe3 col-12-12">
+						<div class="_1YokD2 _3Mn1Gg" style="flex-grow: 1; overflow: visible;">
+							<div class="_1YokD2 _3Mn1Gg col-12-12"
+								style="box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;">
+
+								<!-- ===== adress ==== -->
+								<!-- ======end add==== -->
+								
+			<!--====================================Cart Views==========================================================-->
+			
+			<!--FLASH MESSAGE-->
+			<!--<div class="alert alert-success" th:if="${message}">
+				<span th:text="${message}", style="color: orangered; font-size: large;"></span>
+			</div>-->
+			
+			<!--<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>-->
+			
+			
+								
+								<h3 class="mb-4">TOTAL CART (<span th:text="${cartCountValue}">2</span> items)</h3>
+								<div th:if="${cart.isEmpty()}">
+									<h3 style="color: orangered;">Your cart is empty. Add some product...!</h4><br>
+									<a th:href="@{/home}"><button style="padding: 2% 6%; background-color: lightskyblue; border: none;">Return To Shop</button></a>
+								</div>
+								<div class="_1AtVbE col-12-12" th:each="(cartitem, iStat : ${cart})">
+									<div class="zab8Yh _10k93p">
+										<div class="_2nQDXZ">
+											<a href="#"><span>
+													<div class="CXW8mj" style="height: 112px; width: 112px;">
+														<img loading="lazy" class="_396cs4" alt=""
+															th:src="@{${'/productimages/' + cartitem.imageName}}">
+													</div>
+												</span>
+											</a>
+											<div class="_3fSRat">
+												<div class="_2-uG6-">
+													<a class="_2Kn22P gBNbID" href="#" th:text="${cartitem.name}">Mi Smartphone </a>
+												</div>
+												<div class="_20RCA6">Color : <span th:text="${cartitem.color}"> Black, Blue </span></div>
+												<div class="_3ZS8sw">Brand : <span th:text="${cartitem.brand}">Levies</span></div>
+												<div class="_3ZS8sw">Descr : <span th:text="${cartitem.description}">Levies</span></div>
+												<div class="_3ZS8sw">Seller : Asif@123</div>
+                                                <span class="_2-ut7f _1WpvJ7">₹</span><span class="_2-ut7f _1WpvJ7" th:text="${cartitem.discountedPrice}">₹29,999</span>
+                                                <span class="_1YQFQF _3lubdO _2cpDDY" style="color:red;">₹</span><span class="_1YQFQF _3lubdO _2cpDDY" style="color:red;" th:text="${cartitem.price}">₹29,999</span>
+                                                <span class="product-price" th:text="${cartitem.discountPersent}"> 800</span><span class="dis-rate">%  off</span>
+												<div class="_3zPVJV">
+
+												</div>
+											</div>
+
+										</div>
+										<!-- ======= ins ==== -->
+										<!-- ======= end insrnc === -->
+										<div class="nZz3kj _1hNI6F">
+											<!--<div class="_1uc2IE">
+												<div class="_3dY_ZR">
+													<button class="_23FHuj" disabled=""> – </button>
+													<div class="_26HdzL">
+														<input type="text" class="_253qQJ" value="1">
+													</div>
+													<a th:href="@{/home/addToCart/{id} (id = ${cartitem.id})}"><button class="_23FHuj"> + </button></a>
+												</div>
+											</div>-->
+											<div class="_10vWcL td-FUv WDiNrH">
+												<a th:href="@{/home/saveLater/{index} (index = ${iStat.index})}"><div class="_3dsJAO">Save for later</div></a>
+												<a th:href="@{/home/addToCart/{id} (id = ${cartitem.id})}"><div class="_3dsJAO">Add More</div></a>
+												<a th:href="@{/home/removeCartItem/{index} (index = ${iStat.index})}"><div class="_3dsJAO" onclick="return confirm('Are you sure you want to remove this item...?')">Remove</div></a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="_1AtVbE col-12-12 _78xt5Y">
+									<div class="VUS-tD eBV0fb" th:if="${!cart.isEmpty()}">
+											<a th:href="@{/checkDetails}" target="_blank" title="You can make order from here!">
+											<button class="_2KpZ6l _2ObVJD _3AWRsL">
+												<span>Place Order</span>
+											</button></a>
+									</div>
+								</div>
+							</div>
+						</div>
+		
+		<!--=======================================End================================================================-->				
+						
+						
+		<!--====================================Price Breakup==========================================================-->
+						
+						<div class="_1YokD2 _3Mn1Gg col-4-12 _78xt5Y" style="padding: 0px 0px 0px 16px;">
+							<div class="_1AtVbE col-12-12">
+								<div class="dimARw">
+									<div class="_35mLK5">
+										<span class="_3aPjap">Price details</span>
+										<div class="_I_XQO">
+											<div class="_1MaUCb">
+												<div class="_2SabxT">
+													<div class="nxl3SA">Price &nbsp (<span th:text="${cartCountValue}"></span> &nbsp items)</div>
+												</div>
+												<div>
+													₹<span class="_1YQFQF" th:text="${totalCartAmount}">₹53,998</span>
+												</div>
+											</div>
+											<div class="_1MaUCb">
+												<div class="_2SabxT">
+													<div class="nxl3SA">Discount</div>
+												</div>
+												<div>
+													<span class="_1YQFQF">
+													<span class="_3qPnhZ"> − ₹</span><span class="_3qPnhZ" th:text="${totalDiscAmount}">− ₹3,000</span>
+													</span>
+												</div>
+											</div>
+											<div class="_1MaUCb">
+												<div class="_2SabxT">
+													<div class="nxl3SA">Delivery Charges</div>
+												</div>
+												<div>
+													<span th:if="${Delivery_Charges!=0.0}">[[${Delivery_Charges}]]</span><span class="_1YQFQF" th:if="${Delivery_Charges==0.0}"><span class="_3qPnhZ" >Free</span></span>
+												</div>
+											</div>
+											<div class="_3LxTgx">
+												<div class="Ob17DV">
+													<div class="_24KATy">
+														<div class="_2npqm0">Total Amount</div>
+													</div>
+													<div class="z4Ha90">
+														<span>
+															<div class="_1dqRvU">
+																<div class="Ob17DV _3X7Jj1">
+																	<div class="_24KATy">
+																		<div class="_2npqm0">
+
+																		</div>
+																	</div>
+																	<div class="z4Ha90">
+																		₹<span th:text="${TotalFinalAmount}"> ₹50,998</span>
+																	</div>
+																</div>
+															</div>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div class="_3s5O6i">You will save &nbsp;₹<span th:text="${totalDiscAmount}"></span>&nbsp;on this order</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+	</div>
+	
+	 <!--=======================================End==============================================-->
+	
+	
+	  <!--====================================Save For Later======================================-->
+	   
+			<div class="_1Er18h mt-2">
+				<div class="_6t1WkM _3HqJxg">
+					<div class="_1YokD2 _2GoDe3 col-12-12">
+						<div class="_1YokD2 _3Mn1Gg" style="flex-grow: 1; overflow: visible;">
+							<div class="_1YokD2 _3Mn1Gg col-12-12">
+
+								<!-- ===== adress ==== -->
+								<!-- ======end add==== -->
+
+								<h3 class="mb-4">SAVE FOR LATER (<span th:text="${saveForLaterCountValue}">2</span> items)</h3>
+								<div th:if="${saveForLater.isEmpty()}">
+									<h3 style="color: orangered">Currently, nothing is save for later...!</h3><br>
+									<a th:href="@{/home}"><button style="padding: 2% 6%; background-color: lightskyblue; border: none;">Return To Shop</button></a>
+								</div>
+								<div class="_1AtVbE col-12-12" th:each="(cartitem, iStat : ${saveForLater})">
+									<div class="zab8Yh _10k93p">
+										<div class="_2nQDXZ">
+											<a href="#"><span>
+													<div class="CXW8mj" style="height: 112px; width: 112px;">
+														<img loading="lazy" class="_396cs4" alt=""
+															th:src="@{${'/productimages/' + cartitem.imageName}}">
+													</div>
+												</span>
+											</a>
+											<div class="_3fSRat">
+												<div class="_2-uG6-">
+													<a class="_2Kn22P gBNbID" href="#" th:text="${cartitem.name}">Mi Smartphone </a>
+												</div>
+												<div class="_20RCA6">Color : <span th:text="${cartitem.color}"> Black, Blue </span></div>
+												<div class="_3ZS8sw">Brand : <span th:text="${cartitem.brand}">Levies</span></div>
+												<div class="_3ZS8sw">Descr : <span th:text="${cartitem.description}">Levies</span></div>
+												<div class="_3ZS8sw">Seller : Asif@123</div>
+                                                <span class="_2-ut7f _1WpvJ7">₹</span><span class="_2-ut7f _1WpvJ7" th:text="${cartitem.discountedPrice}">₹29,999</span>
+                                                <span class="_1YQFQF _3lubdO _2cpDDY" style="color:red;">₹</span><span class="_1YQFQF _3lubdO _2cpDDY" style="color:red;" th:text="${cartitem.price}">₹29,999</span>
+                                                <span class="product-price" th:text="${cartitem.discountPersent}"> 800</span><span class="dis-rate">%  off</span>
+												<div class="_3zPVJV">
+
+												</div>
+											</div>
+
+										</div>
+										<!-- ======= ins ==== -->
+										<!-- ======= end insrnc === -->
+										<div class="nZz3kj _1hNI6F">
+											<!--<div class="_1uc2IE">
+												<div class="_3dY_ZR">
+													<button class="_23FHuj" disabled=""> – </button>
+													<div class="_26HdzL">
+														<input type="text" class="_253qQJ" value="1">
+													</div>
+													<a th:href="@{/home/addToCart/{id} (id = ${cartitem.id})}"><button class="_23FHuj"> + </button></a>
+												</div>
+											</div>-->
+											<div class="_10vWcL td-FUv WDiNrH">
+												<!--<a th:href="@{/home/saveLater/{index} (index = ${iStat.index})}"><div class="_3dsJAO">Save for later</div></a>-->
+												<a th:href="@{/home/moveToCart/{index} (index = ${iStat.index})}"><div class="_3dsJAO">Move to cart</div></a>
+												<a th:href="@{/home/removeSaveLaterItem/{index} (index = ${iStat.index})}"><div class="_3dsJAO" onclick="return confirm('Are you sure you want to remove this item...?')">Remove</div></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<!--	=======================================End==============================================    -->
+		
+		
+		<!--	==================================Normal Products Sections=====================================   -->
+				
+										<div class="col-sm-6 col-md-4 col-lg-3" th:each="(listofproducts : ${listofProduct})">
+											<div class="item">
+												<div class="products">
+													<div class="product">
+														<div class="product-image">
+															<div class="image">
+																<a th:href="@{/home/getDetailOfParticularProduct/{id} (id=${listofproducts.id})}">
+																	<img th:src="@{${'/productimages/' + listofproducts.imageName}}" alt="">
+																</a>
+															</div>
+															<div class="tag new"><span>new</span></div>
+														</div>
+
+														<div class="product-info text-left">
+															<h3 class="name"><a th:href="@{/home/getDetailOfParticularProduct/{id} (id=${listofproducts.id})}"
+															th:text="${listofproducts.name}">Floral Print Buttoned</a></h3>
+															
+															<div class="rating rateit-small"></div>
+															
+															<div class="description"></div>
+															
+															<div class="product-price"> <span class="price" th:text="${listofproducts.discountedPrice}">450.99</span>
+															
+															<span class="price-before-discount" th:text="${listofproducts.price}"> 800</span>&nbsp
+															
+															<span class="product-price" th:text="${listofproducts.discountPersent}"> 800</span><span class="dis-rate">% off</span>
+															</div>
+														</div>
+														
+													</div>
+												</div>
+												
+											</div>
+										</div>
+										
+							<!--	================================    -->
+
+
+
+<!--Iss code ko list page par dikhana hai...jaha hum Add, Edit and Delete Action ko perform kar rahe hai-->
+<script th:inline="javascript">
+	window.onload = function() 
+	{
+		var msg = /*[[${message}]]*/       
+		
+		console.log(msg);
+		
+		if(msg == "If item added") 
+		{
+			Command: toastr["success"] ("Item successfully added to cart.")
+		} 
+		else if(msg == "If item removed") 
+		{
+			Command: toastr["error"] ("Item successfully removed from cart.")
+		} 
+		else if(msg == "If item saved for later") 
+		{
+			Command: toastr["warning"] ("Item has been Saved For Later.")
+		}
+		else if(msg == "If item removed from save for later") 
+		{
+			Command: toastr["error"] ("Item has been removed from your saved list.")
+		}
+		else if(msg == "If item moved back to cart") 
+		{
+			Command: toastr["info"] ("Item has been moved to your cart.")
+		}
+		
+		toastr.options = 
+		{
+				'closeButton': true,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+		}
+	}
+</script>
+
+							
+</body>
+</html>
+	

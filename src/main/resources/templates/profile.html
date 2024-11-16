@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<style>
+		.personal {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+		}
+
+		.page-wrapper.compact-wrapper .page-body-wrapper .page-body {
+			padding-top: 30px;
+			margin-left: 290px;
+		}
+
+		.page-wrapper .page-body-wrapper .page-body {
+			min-height: calc(100vh - 76px);
+			margin-top: 76px;
+			padding: 0 15px 0 15px;
+			position: relative;
+			-webkit-transition: 0.5s;
+			transition: 0.5s;
+			background-color: #f5f7fb;
+		}
+
+		.container-fluid {
+			width: 100%;
+			padding-right: var(--bs-gutter-x, 0.75rem);
+			padding-left: var(--bs-gutter-x, 0.75rem);
+			margin-right: auto;
+			margin-left: auto;
+		}
+
+		div .page-header {
+			padding-bottom: 30px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="page-body">
+		<div class="container-fluid">
+			
+			<nav class="sidebar sidebar-offcanvas" id="sidebar">
+				<ul class="nav">
+					<!--<li class="nav-item nav-profile">
+						<a href="#" class="nav-link">
+							<div class="nav-profile-image">
+								<img src="/images/avatar-01.jpg" alt="profile">
+								<span class="login-status online"></span>
+							</div>
+							<div class="nav-profile-text d-flex flex-column">
+								<span class="font-weight-bold mb-2" style="color: blueviolet;"> [[${user.fullname}]]</span>
+							</div>
+						</a>
+					</li>-->
+					
+					<!--<li class="nav-item">
+						<a class="nav-link" th:href="@{/Order/listOfOrder}" target="_blank">
+							<span class="menu-title">My Order</span>
+							 <i class="mdi mdi-home menu-icon"></i> 
+						</a>
+					</li>-->
+					
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/}" target="_blank">
+							<span class="menu-title">Home</span>
+						</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/Order/listOfOrder2}" target="_blank">
+							<span class="menu-title">My Order</span>
+						</a>
+					</li>
+					
+					<li class="nav-item">
+						<div class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false"
+							aria-controls="general-pages">
+								<li class="nav-item"> <a class="nav-link" th:href="@{/ViewMyProfile}"> Your Profile </a></li>
+								<li class="nav-item"> <a class="nav-link" th:href="@{/address/listOfAddress}"> Manage Addresses </a></li>
+							<i class="menu-arrow"></i>
+						</div>
+						
+					</li>
+					<div class="nav-item">
+						<a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}" 
+						onclick="return confirm(' “Are you sure you want to log out?” ')">
+							<span class="menu-title" style="color: red;">Log Out</span>
+							<!-- <i class="mdi mdi-home menu-icon"></i> -->
+						</a>
+					</div>
+				</ul>
+			</nav>
+			
+			
+		</div>
+		<!-- Container-fluid starts-->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-8 col-xl-8">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header pb-0">
+									<h5> Personal Information</h5>
+								</div>
+								<div class="card-body">
+									<div class="row personal">
+										<h5 class="col-sm-6">Name</h5>
+										<p class="col-sm-6">[[${user.fullname}]]</p>
+									</div>
+									<div class=" row personal">
+										<h5 class="col-sm-6">Gender</h5>
+										<p class="col-sm-6">[[${user.gender}]]</p>
+									</div>
+									<div class=" row personal">
+										<h5 class="col-sm-6">Email</h5>
+										<p class="col-sm-6">[[${user.email}]]</p>
+									</div>
+									<div class="row personal">
+										<h5 class="col-sm-6">Mobile</h5>
+										<p class="col-sm-6">[[${user.mobile}]]</p>
+									</div>
+									<div class="row personal">
+										<h5 class="col-sm-6">Role</h5>
+										<p class="col-sm-6">[[${user.role}]]</p>
+									</div>
+									<div class="row personal">
+										<h5 class="col-sm-6">Last Updated</h5>
+										<p class="col-sm-6">[[${user.createdAt}]]</p>
+									</div>
+								</div>
+								<!--<div class="card-footer">
+									
+									<button class="btn btn-primary-light" type="button"><a sec:authorize="isAuthenticated()"
+									th:href="@{/logout}"
+									onclick="return confirm(' “Are you sure you want to log out?” ')"><i
+										data-feather="log-out"></i>Log out</a></button>
+
+									<button class="btn btn-primary" type="button"><a sec:authorize="isAuthenticated()"
+											th:href="@{/logout}"
+											onclick="return confirm(' “Are you sure you want to log out?” ')"></a>Log
+										out</button>
+
+								</div>-->
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Container-fluid Ends-->
+	</div>
+</body>
+
+</html>

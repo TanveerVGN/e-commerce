@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Manage Adresses</title>
+</head>
+
+<style>
+    
+    
+    .container {
+      margin-top: 2rem;
+      background-color:white;
+      border-radius: 10px;
+    }
+    .form-group{
+        margin-top: 0rem;
+    }
+    .form-group p{
+        margin-top: 1rem;
+    }
+    form{
+        box-shadow: 0 10px 14px rgba(41, 41, 41, 0.19), 0 6px 6px rgba(39, 39, 39, 0.23);
+        padding: 40px;
+    }
+    
+    .all-Address-Details{
+		text-align: center;
+		margin-top: 2%;
+	}
+</style>
+
+<body>
+	<h3 class="all-Address-Details">Manage Adresses Details</h3>
+	<h4 class="all-Address-Details"><a class="back-to-profile" th:href="@{/ViewMyProfile}">BACK TO PROFILE</a></h4>
+    <div class="container">
+		
+		 <div class="all-Address-Details" th:if="${listOfAddress.isEmpty()}">
+			<p>No Records found. Add some address...!</p>
+		</div>
+		
+        <form action="#" th:each="(listOfAdd, iStat : ${listOfAddress})">
+            <p th:text="${iStat.index+1}"></p>
+            
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">First Name :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.firstName}"></p>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Last Name :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.lastName}"></p>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Street Address :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.streetAddress}">Sector-2 Noida</p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Country :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.country}">Noida</p>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">City :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.city}">Noida</p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">State :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.state}">Gujrat</p>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Pincode :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.pincode}">201301</p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Mobile :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.mobile}">201301</p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <label  class="col-sm-2 col-form-label">Last Updated :</label>
+                <div class="col-sm-10">
+                    <p th:text="${listOfAdd.createdAt}">201301</p>
+                </div>
+            </div>
+            
+            <div class="form-group gap-2 row">
+				
+                <div class="col-sm-2">
+                   <a th:href="@{/address/getAddressPage}" class="btn btn-primary">Add New Address</a> 
+                </div>
+                
+                <div class="col-sm-2">
+                    <a th:href="@{/address/getOrEditAddress/{id} (id=${listOfAdd.id})}" class="btn btn-warning">Edit Address</a>
+                </div>
+                
+                <div class="col-sm-2">
+                    <a th:href="@{/address/deleteAddress/{id} (id=${listOfAdd.id})}" class="btn btn-danger">Delete Address</a>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+				<div class="all-Address-Details">
+                   <a th:href="@{/address/getAddressPage}" class="btn btn-primary">Add New Address</a> 
+                </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>
